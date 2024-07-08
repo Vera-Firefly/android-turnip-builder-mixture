@@ -59,6 +59,7 @@ prepare_workdir(){
 	###
 	echo "Exracting mesa source to a folder ..." $'\n'
 	unzip mesa-main.zip &> /dev/null
+        cp -rf ../freedreno_devices.py mesa-main/src/freedreno/common/
 	cd mesa-main
 }
 
