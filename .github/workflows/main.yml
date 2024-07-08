@@ -1,0 +1,31 @@
+name: Build "turnip"
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "20 5 2,9,16,23 * *"
+
+jobs:
+  start_building_turnip:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Prepare environment
+      run: |
+        sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+        sudo apt update
+        sudo apt build-dep mesa -y
+        sudo sed -i 's/jammy/mantic/g' /etc/apt/sources.list
+        sudo apt update
+        sudo apt install meson
+
+    - name: Execute build script
+      run: bash ./turnip_builder.sh
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Upload
+        path: |
+           turnip_workdir/libvulkan_freedreno.so
