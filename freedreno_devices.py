@@ -822,6 +822,7 @@ a7xx_730 = A7XXProps(
     )
 
 a7xx_735 = A7XXProps(
+        cmdbuf_start_a725_quirk = True,
         stsc_duplication_quirk = True,
         has_event_write_sample_count = True,
         ubwc_unorm_snorm_int_compatible = True,
