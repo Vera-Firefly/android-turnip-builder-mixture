@@ -1120,8 +1120,8 @@ add_gpus([
         cs_shared_mem_size = 32 * 1024,
         wave_granularity = 2,
         fibers_per_sp = 128 * 2 * 16,
-        magic_regs = a740_magic_regs,
-        raw_magic_regs = a740_raw_magic_regs,
+        magic_regs = a740_a32_magic_regs,
+        raw_magic_regs = a740_a32_raw_magic_regs,
     ))
 
 add_gpus([
