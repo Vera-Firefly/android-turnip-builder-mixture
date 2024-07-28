@@ -945,78 +945,6 @@ a730_raw_magic_regs = [
         [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_80F4, 0x00000000],
     ]
 
-a740_magic_regs = dict(
-        # PC_POWER_CNTL = 7,
-        TPL1_DBG_ECO_CNTL = 0x11100000,
-        GRAS_DBG_ECO_CNTL = 0x00004800,
-        SP_CHICKEN_BITS = 0x10001400,
-        UCHE_CLIENT_PF = 0x00000084,
-        # Blob uses 0x1f or 0x1f1f, however these values cause vertices
-        # corruption in some tests.
-        PC_MODE_CNTL = 0x0000003f,
-        SP_DBG_ECO_CNTL = 0x10000000,
-        RB_DBG_ECO_CNTL = 0x00000000,
-        RB_DBG_ECO_CNTL_blit = 0x00000000,  # is it even needed?
-        # HLSQ_DBG_ECO_CNTL = 0x0,
-        RB_UNKNOWN_8E01 = 0x0,
-        VPC_DBG_ECO_CNTL = 0x02000000,
-        UCHE_UNKNOWN_0E12 = 0x00000000,
-
-        RB_UNKNOWN_8E06 = 0x02080000,
-    )
-
-a740_raw_magic_regs = [
-        [A6XXRegs.REG_A6XX_UCHE_CACHE_WAYS, 0x00040004],
-        [A6XXRegs.REG_A6XX_TPL1_DBG_ECO_CNTL1, 0x00040724],
-
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE08, 0x00000400],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE09, 0x00430800],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE0A, 0x00000000],
-        [A6XXRegs.REG_A7XX_UCHE_UNKNOWN_0E10, 0x00000000],
-        [A6XXRegs.REG_A7XX_UCHE_UNKNOWN_0E11, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6C, 0x00000000],
-        [A6XXRegs.REG_A6XX_PC_DBG_ECO_CNTL, 0x00100000],
-        [A6XXRegs.REG_A7XX_PC_UNKNOWN_9E24, 0x21585600],
-        [A6XXRegs.REG_A7XX_VFD_UNKNOWN_A600, 0x00008000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE06, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6A, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6B, 0x00000080],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE73, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB02, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB01, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB22, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_B310, 0x00000000],
-
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8120, 0x09510840],
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8121, 0x00000a62],
-
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8009, 0x00000000],
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800A, 0x00000000],
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800B, 0x00000000],
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800C, 0x00000000],
-
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE2,   0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE2+1, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE4,   0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE4+1, 0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE6,   0x00000000],
-        [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE6+1, 0x00000000],
-
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_80A7, 0x00000000],
-
-        [A6XXRegs.REG_A7XX_HLSQ_UNKNOWN_A9AC, 0x00000000],
-        [A6XXRegs.REG_A7XX_RB_UNKNOWN_8E79,   0x00000000],
-        [A6XXRegs.REG_A7XX_RB_UNKNOWN_8899,   0x00000000],
-        [A6XXRegs.REG_A7XX_RB_UNKNOWN_88F5,   0x00000000],
-        [A6XXRegs.REG_A7XX_RB_UNKNOWN_8C34,   0x00000000],
-
-        # Shading rate group
-        [A6XXRegs.REG_A6XX_RB_UNKNOWN_88F4,   0x00000000],
-        [A6XXRegs.REG_A7XX_HLSQ_UNKNOWN_A9AD, 0x00000000],
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8008, 0x00000000],
-        [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_80F4, 0x00000000],
-    ]
-
 add_gpus([
         # These are named as Adreno730v3 or Adreno725v1.
         GPUId(chip_id=0x07030002, name="FD725"),
@@ -1053,21 +981,83 @@ add_gpus([
     ))
 
 add_gpus([
-        GPUId(735),
-        GPUId(chip_id=0x43030B00, name="FD735"), # KGSL, no speedbin data
-        GPUId(chip_id=0xffff43030B00, name="FD735"), # Default no-speedbin fallback
+        GPUId(chip_id=0x43030B00, name="FD735")
     ], A6xxGPUInfo(
         CHIP.A7XX,
         [a7xx_base, a7xx_735],
-        num_ccu = 6,
-        tile_align_w = 96,
-        tile_align_h = 32,
-        num_vsc_pipes = 32,
-        cs_shared_mem_size = 32 * 1024,
-        wave_granularity = 2,
-        fibers_per_sp = 128 * 2 * 16,
-        magic_regs = a740_magic_regs,
-        raw_magic_regs = a740_raw_magic_regs,
+        num_ccu = 3,                                            # Maybe correct             # Seems like 3
+        tile_align_w = 96,                                      # Verified
+        tile_align_h = 32,                                      # Verified
+        num_vsc_pipes = 32,                                     # Probably correct
+        cs_shared_mem_size = 32 * 1024,                         # Probably correct
+        wave_granularity = 2,                                   # Probably correct
+        fibers_per_sp = 128 * 2 * 16,                           # Probably correct
+        magic_regs = dict(
+            TPL1_DBG_ECO_CNTL = 0x11100000,                     # Verified
+            GRAS_DBG_ECO_CNTL = 0x00004800,                     # Verified
+            SP_CHICKEN_BITS = 0x10001400,                       # Verified
+            UCHE_CLIENT_PF = 0x00000084,                        # Probably correct          # Doesn't seem to be emitted
+            PC_MODE_CNTL = 0x0000001f,                          # Probably correct          # blob has 0x1f1f but 0x1f seem correct too.
+            SP_DBG_ECO_CNTL = 0x10000000,                       # Verified
+            RB_DBG_ECO_CNTL = 0x00000001,                       # Verified
+            RB_DBG_ECO_CNTL_blit = 0x00000001,                  # Verified                  # is it even needed?
+            RB_UNKNOWN_8E01 = 0x0,                              # Verified
+            VPC_DBG_ECO_CNTL = 0x02000000,                      # Verified
+            UCHE_UNKNOWN_0E12 = 0x00000000,                     # Verified
+
+            RB_UNKNOWN_8E06 = 0x02080000,                       # Verified
+        ),
+        raw_magic_regs = [
+            [A6XXRegs.REG_A6XX_UCHE_CACHE_WAYS, 0x00000000],    # Verified
+            [A6XXRegs.REG_A6XX_TPL1_DBG_ECO_CNTL1, 0x00040724],                             # Should it be 0x00040700 ? On A740 as well?
+
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE08, 0x00000400],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE09, 0x00430800],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE0A, 0x00000000],    # Verified
+            [A6XXRegs.REG_A7XX_UCHE_UNKNOWN_0E10, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_UCHE_UNKNOWN_0E11, 0x00000000],                              # Should it be 0x00000080 ? On A740 as well?
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6C, 0x00000000],    # Verified
+            [A6XXRegs.REG_A6XX_PC_DBG_ECO_CNTL, 0x00100000],    # Verified
+            [A6XXRegs.REG_A7XX_PC_UNKNOWN_9E24, 0x01585600],    # Verified
+            [A6XXRegs.REG_A7XX_VFD_UNKNOWN_A600, 0x00008000],   # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE06, 0x00000000],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6A, 0x00000000],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6B, 0x00000080],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE73, 0x00000000],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB02, 0x00000000],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB01, 0x00000000],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB22, 0x00000000],    # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_B310, 0x00000000],    # Verified
+
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8120, 0x09510840],  # Verified
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8121, 0x00000a62],  # Verified
+
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8009, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800A, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800B, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800C, 0x00000000],  # Verified
+
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE2,   0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE2+1, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE4,   0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE4+1, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE6,   0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE6+1, 0x00000000],  # Verified
+
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_80A7, 0x00000000],  # Verified
+
+            [A6XXRegs.REG_A7XX_HLSQ_UNKNOWN_A9AC, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_8E79,   0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_8899,   0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_88F5,   0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_8C34,   0x00000000],
+
+            # Shading rate group
+            [A6XXRegs.REG_A6XX_RB_UNKNOWN_88F4,   0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_HLSQ_UNKNOWN_A9AD, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8008, 0x00000000],  # Verified
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_80F4, 0x00000000],  # Verified
+        ],
     ))
 
 add_gpus([
@@ -1087,8 +1077,76 @@ add_gpus([
         cs_shared_mem_size = 32 * 1024,
         wave_granularity = 2,
         fibers_per_sp = 128 * 2 * 16,
-        magic_regs = a740_magic_regs,
-        raw_magic_regs = a740_raw_magic_regs,
+        magic_regs = dict(
+            # PC_POWER_CNTL = 7,
+            TPL1_DBG_ECO_CNTL = 0x11100000,
+            GRAS_DBG_ECO_CNTL = 0x00004800,
+            SP_CHICKEN_BITS = 0x10001400,
+            UCHE_CLIENT_PF = 0x00000084,
+            # Blob uses 0x1f or 0x1f1f, however these values cause vertices
+            # corruption in some tests.
+            PC_MODE_CNTL = 0x0000003f,
+            SP_DBG_ECO_CNTL = 0x10000000,
+            RB_DBG_ECO_CNTL = 0x00000000,
+            RB_DBG_ECO_CNTL_blit = 0x00000000,  # is it even needed?
+            # HLSQ_DBG_ECO_CNTL = 0x0,
+            RB_UNKNOWN_8E01 = 0x0,
+            VPC_DBG_ECO_CNTL = 0x02000000,
+            UCHE_UNKNOWN_0E12 = 0x00000000,
+
+            RB_UNKNOWN_8E06 = 0x02080000,
+        ),
+        raw_magic_regs = [
+            [A6XXRegs.REG_A6XX_UCHE_CACHE_WAYS, 0x00040004],
+            [A6XXRegs.REG_A6XX_TPL1_DBG_ECO_CNTL1, 0x00040724],
+
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE08, 0x00000400],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE09, 0x00430800],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE0A, 0x00000000],
+            [A6XXRegs.REG_A7XX_UCHE_UNKNOWN_0E10, 0x00000000],
+            [A6XXRegs.REG_A7XX_UCHE_UNKNOWN_0E11, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6C, 0x00000000],
+            [A6XXRegs.REG_A6XX_PC_DBG_ECO_CNTL, 0x00100000],
+            [A6XXRegs.REG_A7XX_PC_UNKNOWN_9E24, 0x21585600],
+            [A6XXRegs.REG_A7XX_VFD_UNKNOWN_A600, 0x00008000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE06, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6A, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE6B, 0x00000080],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AE73, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB02, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB01, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_AB22, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_B310, 0x00000000],
+
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8120, 0x09510840],
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8121, 0x00000a62],
+
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8009, 0x00000000],
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800A, 0x00000000],
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800B, 0x00000000],
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_800C, 0x00000000],
+
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE2,   0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE2+1, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE4,   0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE4+1, 0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE6,   0x00000000],
+            [A6XXRegs.REG_A7XX_SP_UNKNOWN_0CE6+1, 0x00000000],
+
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_80A7, 0x00000000],
+
+            [A6XXRegs.REG_A7XX_HLSQ_UNKNOWN_A9AC, 0x00000000],
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_8E79,   0x00000000],
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_8899,   0x00000000],
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_88F5,   0x00000000],
+            [A6XXRegs.REG_A7XX_RB_UNKNOWN_8C34,   0x00000000],
+
+            # Shading rate group
+            [A6XXRegs.REG_A6XX_RB_UNKNOWN_88F4,   0x00000000],
+            [A6XXRegs.REG_A7XX_HLSQ_UNKNOWN_A9AD, 0x00000000],
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_8008, 0x00000000],
+            [A6XXRegs.REG_A7XX_GRAS_UNKNOWN_80F4, 0x00000000],
+        ],
     ))
 
 # Values from blob v676.0
