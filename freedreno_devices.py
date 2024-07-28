@@ -981,11 +981,13 @@ add_gpus([
     ))
 
 add_gpus([
-        GPUId(chip_id=0x43030B00, name="FD735")
+        GPUId(735),
+        GPUId(chip_id=0x43030B00, name="FD735"),
+        GPUId(chip_id=0xffff43030B00, name="FD735"),
     ], A6xxGPUInfo(
         CHIP.A7XX,
         [a7xx_base, a7xx_735],
-        num_ccu = 3,                                            # Maybe correct             # Seems like 3
+        num_ccu = 6,                                            # Maybe correct             # Seems like 3
         tile_align_w = 96,                                      # Verified
         tile_align_h = 32,                                      # Verified
         num_vsc_pipes = 32,                                     # Probably correct
